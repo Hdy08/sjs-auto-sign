@@ -16,7 +16,7 @@
 
   const storageKey = 'isSigned';
   const LOG_PREFIX = '[sjs-auto-sign]';
-  const MIDNIGHT_CALIBRATION_MS = 10000;
+  const MIDNIGHT_CALIBRATION_MS = 8000;
 
   const log = (...args) => console.log(LOG_PREFIX, ...args);
   const warn = (...args) => console.warn(LOG_PREFIX, ...args);
@@ -28,7 +28,7 @@
   }
 
   function isSigned(text) {
-    return /签到排名|今日已签/.test(text || '');
+    return /签到排名|今日排名|已签到/.test(text || '');
   }
 
   function isSuccess(text) {
@@ -68,7 +68,7 @@
 
     setTimeout(() => {
       const calibratedDelay = Math.max(0, targetTime - Date.now());
-      log(`0 点前校准剩余时间，约 ${msToHHmmss(calibratedDelay)} 后执行。`);
+      log(`已校准剩余时间，约 ${msToHHmmss(calibratedDelay)} 后执行。`);
 
       setTimeout(async () => {
         log('到达 0 点，调用接口签到。');
